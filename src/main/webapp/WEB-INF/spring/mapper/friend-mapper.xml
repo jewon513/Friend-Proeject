@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.friend.persistence.FriendDao">
+
+	<insert id="insert">
+		INSERT INTO `tbl_friend`
+			(`f_id`,
+			`f_user`,
+			`f_name`,
+			`f_tel`,
+			`f_addr`,
+			`f_hobby`,
+			`f_relation`)
+		VALUES
+			(#{f_id},
+			#{f_user},
+			#{f_name},
+			#{f_tel},
+			#{f_addr},
+			#{f_hobby},
+			#{f_relation}
+		);
+	</insert>
+	
+	<update id="update" parameterType="friendDTO">
+		UPDATE `tbl_friend`
+		SET
+		`f_user` = #{f_user},
+		`f_name` = #{f_name},
+		`f_tel` = #{f_tel},
+		`f_addr` = #{f_addr},
+		`f_hobby` = #{f_hobby},
+		`f_relation` = #{f_relation}
+		WHERE `f_id` = #{f_id}
+				
+	</update>
+	
+	<select id="nameSearch" resultType="friendDTO">
+		SELECT * FROM tbl_friend
+		WHERE f_user = #{f_user} AND f_name LIKE CONCAT ('%', #{search}, '%')
+	</select>
+	
+	<select id="telSearch" resultType="friendDTO">
+		SELECT * FROM tbl_friend
+		WHERE f_user = #{f_user} AND f_tel LIKE CONCAT ('%', #{search}, '%')
+	</select>
+
+</mapper> 
